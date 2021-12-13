@@ -1,0 +1,22 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lstillwe/team-profile-generator.git"
+  },
+  "author": "Lisa Stillwell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lstillwe/team-profile-generator/issues"
+  },
+  "homepage": "https://github.com/lstillwe/team-profile-generator#readme"
+}
