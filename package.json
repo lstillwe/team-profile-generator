@@ -1,13 +1,13 @@
 {
   "name": "team-profile-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app generates s styled html page given user entered employees in a work team",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "test": "npm run test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/lstillwe/team-profile-generator/issues"
   },
-  "homepage": "https://github.com/lstillwe/team-profile-generator#readme"
+  "homepage": "https://github.com/lstillwe/team-profile-generator#readme",
+  "dependencies": {
+    "jest": "^27.4.5"
+  }
 }
