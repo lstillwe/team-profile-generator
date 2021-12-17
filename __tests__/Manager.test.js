@@ -31,7 +31,7 @@ describe('Manager', () => {
     describe('Test for retrieval of Manager office numer', () => {
         test('it should return 253C', () => {
             const manager = createTestManager();
-            expect(manager.getOfficeNumber()).toBe('253C');
+            expect(manager.getOffice()).toBe('253C');
         })
     })
 });
