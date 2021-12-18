@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/lstillwe/team-profile-generator#readme",
   "dependencies": {
+    "inquirer": "^8.2.0",
     "jest": "^27.4.5"
   }
 }
