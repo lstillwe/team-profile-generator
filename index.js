@@ -17,17 +17,13 @@ const managerQuestions = [
         type: 'input',
         name: 'name',
         message: "Enter the manager's name:",
-        validate: function(name) {
-            return name != "";
-        }
+        validate: (name) => { return name != "" }
     },
     {
         type: 'input',
         name: 'id',
         message: "Enter the manager's id:",
-        validate: function(id) {
-            return id != "";
-        }
+        validate: (id) => { return  id != "" }
     },
     {
         type: 'input',
@@ -43,9 +39,7 @@ const managerQuestions = [
         type: 'input',
         name: 'office',
         message: "Enter the manager's office number:",
-        validate: function(office) {
-            return office != "";
-        }
+        validate: (office) => { return office != "" }
     },
     {
         type: 'confirm',
@@ -61,17 +55,13 @@ const employeeQuestions = [
         type: 'input',
         name: 'name',
         message: "Enter the employee's name:",
-        validate: function(name) {
-            return name != "";
-        }
+        validate: (name) => { return name != "" }
     },
     {
         type: 'input',
         name: 'id',
         message: "Enter the employee's id:",
-        validate: function(id) {
-            return id != "";
-        }
+        validate: (id) => { return id != "" }
     },
     {
         type: 'input',
@@ -94,26 +84,14 @@ const employeeQuestions = [
         name: 'github',
         message: "Please enter the engineers's github username:",
         when: (input) => input.role === "Engineer",
-        validate: nameInput => {
-            if (nameInput ) {
-                return true;
-            } else {
-                console.log ("Please enter the employee's github username")
-            }
-        }
+        validate: (github) => { return github != "" }
     },
     {
         type: 'input',
         name: 'school',
         message: "Please enter the interns school name:",
         when: (input) => input.role === "Intern",
-        validate: nameInput => {
-            if (nameInput ) {
-                return true;
-            } else {
-                console.log ("Please enter the employee's school name")
-            }
-        }
+        validate: (school) => { return school != "" }
     },
     {
         type: 'confirm',
