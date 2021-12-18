@@ -1,14 +1,15 @@
 // Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-//const generateMarkdown = require('./src/generateHtml');
+const generateHtml = require('./src/generateHtml');
 
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern'); 
 
+// create Array to hold all of the objects that represent the team
 var team = [];
-
+// define roles - other than Manager
 const roles = ['Engineer', 'Intern'];
 
 // Create an array of questions for the manager user input
@@ -17,17 +18,13 @@ const managerQuestions = [
         type: 'input',
         name: 'name',
         message: "Enter the manager's name:",
-        validate: function(name) {
-            return name != "";
-        }
+        validate: (name) => { return name != "" }
     },
     {
         type: 'input',
         name: 'id',
         message: "Enter the manager's id:",
-        validate: function(id) {
-            return id != "";
-        }
+        validate: (id) => { return  id != "" }
     },
     {
         type: 'input',
@@ -43,9 +40,7 @@ const managerQuestions = [
         type: 'input',
         name: 'office',
         message: "Enter the manager's office number:",
-        validate: function(office) {
-            return office != "";
-        }
+        validate: (office) => { return office != "" }
     },
     {
         type: 'confirm',
@@ -56,22 +51,19 @@ const managerQuestions = [
 
 ];
 
+// Create an array of questions for the Engineer and Intern user input
 const employeeQuestions = [
     {
         type: 'input',
         name: 'name',
         message: "Enter the employee's name:",
-        validate: function(name) {
-            return name != "";
-        }
+        validate: (name) => { return name != "" }
     },
     {
         type: 'input',
         name: 'id',
         message: "Enter the employee's id:",
-        validate: function(id) {
-            return id != "";
-        }
+        validate: (id) => { return id != "" }
     },
     {
         type: 'input',
@@ -94,26 +86,14 @@ const employeeQuestions = [
         name: 'github',
         message: "Please enter the engineers's github username:",
         when: (input) => input.role === "Engineer",
-        validate: nameInput => {
-            if (nameInput ) {
-                return true;
-            } else {
-                console.log ("Please enter the employee's github username")
-            }
-        }
+        validate: (github) => { return github != "" }
     },
     {
         type: 'input',
         name: 'school',
         message: "Please enter the interns school name:",
         when: (input) => input.role === "Intern",
-        validate: nameInput => {
-            if (nameInput ) {
-                return true;
-            } else {
-                console.log ("Please enter the employee's school name")
-            }
-        }
+        validate: (school) => { return school != "" }
     },
     {
         type: 'confirm',
@@ -123,16 +103,25 @@ const employeeQuestions = [
     },
 ];
 
-const addManager = () => {
+// prompt for manager questions and add repsonses to team array
+// also call function to add other roles, if desired
+const addEmployees = () => {
     return inquirer.prompt (managerQuestions)
-            .then(answers => {
-                const  { name, id, email, office } = answers; 
-                const manager = new Manager (name, id, email, office);
-        
-                team.push(manager); 
-            })
+        .then(answers => {
+            const  { name, id, email, office, confirmAddEmployee} = answers; 
+            const manager = new Manager (name, id, email, office);
+           
+            // save this employee in the team array
+            team.push(manager);
+
+            // check to see if we should prompt for more employee questions
+            if (confirmAddEmployee) {
+                addEmployee(); 
+            }
+        })
 }
 
+// prompt for Engineer or Intern questions and add repsonses to team array
 const addEmployee = () => {
     return inquirer.prompt (employeeQuestions)
         .then(answers => {
@@ -140,6 +129,7 @@ const addEmployee = () => {
             var { name, id, email, role, github, school, confirmAddEmployee } = answers; 
             var employee; 
 
+            // create object appropriate for the employee role
             if (role === "Engineer") {
                 employee = new Engineer (name, id, email, github);
             } 
@@ -147,9 +137,10 @@ const addEmployee = () => {
                 employee = new Intern (name, id, email, school);
             }
 
+            // save this employee in the team array
             team.push(employee); 
-            console.log(team);
 
+            // check to see if we should prompt for more employee questions
             if (confirmAddEmployee) {
                 addEmployee(); 
             }
@@ -158,34 +149,24 @@ const addEmployee = () => {
 
 
 // write generated html file
-/*
 const writeToFile = (html) => {
-    const filename = "./index.html";
+    const filename = "./dist/index.html";
 
     fs.writeFile(filename, html, function (err) {
         err ? console.log(err) : console.log(filename + " created!")
     });
 }
-*/
 
 // initialize app
 function init() {
-    // set up stuff for saving html file
 
-    // first add manager, and then any employees
-    addManager()
-    .then(addEmployee)
-  /*
-    .then(team => {
-        return generateHTML(team);
-    })
-    .then(html => {
-        return writeToFile(html);
-    })
-  */
-  .catch(err => {
-    console.log(err);
-  });
+    // first add employees
+    addEmployees()
+    .then(() => { return generateHtml(team) })
+    // now generate html
+    .then(html => { return writeToFile(html) })
+    // finally, write to file
+    .catch(err => { console.log(err) });
 }
 
 init();
