@@ -11,6 +11,7 @@ const Intern = require('./lib/Intern');
 var team = [];
 // define roles - other than Manager
 const roles = ['Engineer', 'Intern'];
+var addMoreAfterManager = false;
 
 // Create an array of questions for the manager user input
 const managerQuestions = [
@@ -105,10 +106,10 @@ const employeeQuestions = [
 
 // prompt for manager questions and add repsonses to team array
 // also call function to add other roles, if desired
-const addEmployees = () => {
+const addManager = () => {
     return inquirer.prompt (managerQuestions)
         .then(answers => {
-            const  { name, id, email, office, confirmAddEmployee} = answers; 
+            const  { name, id, email, office, confirmAddEmployee } = answers; 
             const manager = new Manager (name, id, email, office);
            
             // save this employee in the team array
@@ -116,13 +117,14 @@ const addEmployees = () => {
 
             // check to see if we should prompt for more employee questions
             if (confirmAddEmployee) {
-                addEmployee(); 
+            //     addEmployee(); 
+                addMoreAfterManager = true;
             }
         })
 }
 
 // prompt for Engineer or Intern questions and add repsonses to team array
-const addEmployee = () => {
+const addEmployees = () => {
     return inquirer.prompt (employeeQuestions)
         .then(answers => {
 
@@ -142,7 +144,7 @@ const addEmployee = () => {
 
             // check to see if we should prompt for more employee questions
             if (confirmAddEmployee) {
-                addEmployee(); 
+                addEmployees(); 
             }
         });
 }
@@ -160,12 +162,19 @@ const writeToFile = (html) => {
 // initialize app
 function init() {
 
-    // first add employees
-    addEmployees()
-    .then(() => { return generateHtml(team) })
+    // first add manager
+    addManager()
+    // then add additional employees, if desired
+    .then(() => {
+        if (addMoreAfterManager) {
+            return addEmployees();
+        }
+    })
     // now generate html
+    .then(() => { return generateHtml(team) })
+     // finally, write to file
     .then(html => { return writeToFile(html) })
-    // finally, write to file
+    // catch any errors
     .catch(err => { console.log(err) });
 }
 
