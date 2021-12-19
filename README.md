@@ -22,7 +22,7 @@ Execute 'node index.js' and answer question prompts. When finished, an html file
 N/A
 
 ## Walk through video
-[Video-Link](https://watch.screencastify.com/v/1J5evEubtjvhfUTcd6ID)
+[Video-Link](https://drive.google.com/file/d/10Nj9xDgygycAkktwdgYIuHmu4Nt14IUE/view?usp=sharing)
 
 ## Tests
 Execute 'npm test' to run the tests for this project
