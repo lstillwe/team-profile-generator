@@ -6,6 +6,7 @@
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [Contributing](#contributing)
+5. [Video](#video)
 5. [Tests](#tests)
 6. [License](#license)
 7. [Questions](#questions)
@@ -19,10 +20,11 @@ npm install
 ## Usage
 Execute 'node index.js' and answer question prompts. When finished, an html file with automatically be generated in /dist, where a css file already exists, to provide the styling for the html.
 ## Contributing
-N/A
+Please contribute to this project:
+* [Submit bugs and feature requests](https://github.com/lstillwe/team-profile-generator/issues), and help us verify as they are checked in
 
-## Walk through video
-[Video-Link](https://drive.google.com/file/d/10Nj9xDgygycAkktwdgYIuHmu4Nt14IUE/view?usp=sharing)
+## Video
+[Walk-through Video Link](https://drive.google.com/file/d/10Nj9xDgygycAkktwdgYIuHmu4Nt14IUE/view?usp=sharing)
 
 ## Tests
 Execute 'npm test' to run the tests for this project
