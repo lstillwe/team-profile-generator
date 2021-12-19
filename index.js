@@ -144,7 +144,7 @@ const addEmployees = () => {
 
             // check to see if we should prompt for more employee questions
             if (confirmAddEmployee) {
-                addEmployees(); 
+                return addEmployees(); 
             }
         });
 }
